@@ -16,8 +16,7 @@
 // factory function to make players
 function Player(name) // name can be x or o
 {
-  return 
-  {
+  return {
     name
   };
 }
@@ -27,15 +26,17 @@ function Gameboard()
 {
   const gameboard = [
     [
-      [],[],[]
+      null, null, null
     ],
     [
-      [],[],[]
+      null, null, null
     ],
     [
-      [],[],[]
+      null, null, null
     ],
   ];
 
-  return  gameboard;
+  return {
+    gameboard
+  };
 }
