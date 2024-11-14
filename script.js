@@ -14,7 +14,7 @@
 // }
 
 // factory function to make players
-function Player(name) // name can be x or o
+function player(name) // name can be x or o
 {
   return {
     name
@@ -22,9 +22,8 @@ function Player(name) // name can be x or o
 }
 
 // factory function to display gameboard
-function Gameboard()
-{
-  const gameboard = [
+function displayBoard() {
+  const board = [
     [
       null, null, null
     ],
@@ -37,6 +36,6 @@ function Gameboard()
   ];
 
   return {
-    gameboard
+    board
   };
 }
