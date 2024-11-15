@@ -24,3 +24,12 @@ function playRound(player, row, column) {
     gameboard.board[row][column] = player;
     return gameboard.board;
 }
+
+function checkWinner(gameboard) {
+  // check gameboard for a win condition
+}
+
+function isDraw(gameboard) {
+  // check gameboard for a draw condition
+  // if board is full but win condition is false then it's a draw
+}
