@@ -40,19 +40,10 @@ function displayBoard() {
   };
 }
 
-// game() takes the row, column and player(x or o) and returns the player if there is a win or "draw" in case of a draw
-function game(player, row, column) {
-  let gameover = false;
-  while (!gameover) {
-    const gameboard = displayBoard.board;
-    gameboard[row][column] = player;
-    if (checkWinner() === true) {
-      gameover = true;
-      return player;
-    }
-    if (isdraw() == true) {
-      gameover = true;
-      return "draw";
-    }
-  }
+const gameboard = displayBoard();
+
+// playRound() takes the row, column and player(x or o) and updates the board
+function playRound(player, row, column) {
+    gameboard.board[row][column] = player;
+    return gameboard.board
 }
