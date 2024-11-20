@@ -12,8 +12,30 @@ function displayBoard() {
     ],
   ];
 
+  function hasItem(item) {
+    for (row of board) {
+      if (row.includes(item)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function updateValue(oldValue, newValue) {
+    for (row of board) {
+      if (row.includes(oldValue)) {
+        const index = row.indexOf(oldValue);
+        row[index] = newValue;
+        return true;
+      }
+    }
+    return false;
+  }
+
   return {
-    board
+    board,
+    hasItem,
+    updateValue
   };
 }
 
@@ -45,9 +67,9 @@ function game(){
     console.error("Please choose different numbers.");
   }
 
-  if ((player1 < 9 && player1 >=0) && (player2 < 9 && player2 >=0)) {
-    console.log(player1);
-    console.log(player2); 
+  if (gameboard.hasItem(player1) && gameboard.hasItem(player2)) {
+    gameboard.updateValue(player1, 'x');
+    console.log(gameboard.board);  
   }
   else{
     console.error("Please choose from the given numbers.");
