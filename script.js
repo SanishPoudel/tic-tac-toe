@@ -41,12 +41,6 @@ function displayBoard() {
 
 const gameboard = displayBoard();
 
-// playRound() takes the row, column and player(x or o) and updates the board
-function playRound(player, row, column) {
-    gameboard.board[row][column] = player;
-    return gameboard.board;
-}
-
 function checkWinner(gameboard) {
   // check gameboard for a win condition
 }
