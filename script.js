@@ -65,7 +65,7 @@ function game(){
   // this will be the main function that will execute the game
   // the game will continue in a loop unless there is a win or a draw.
   console.table(gameboard.board);
-  for (let i = 0; i < 4; i++) {
+  while (gameboard.isFull !== true) {
     while (1) {
       let player1 = Number(prompt("Choose a location for X. [1-9]"));
 
