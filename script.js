@@ -1,5 +1,5 @@
 // factory function to display gameboard
-function displayBoard() {
+function GameBoard() {
   const board = [
     [
       1, 2, 3
@@ -62,7 +62,8 @@ function game(){
   }
 
   if (gameboard.hasItem(player1) && gameboard.hasItem(player2)) {
-    gameboard.updateValue(player1, 'x');
+    gameboard.updateValue(player1, "X");
+    gameboard.updateValue(player2,"O");
     console.log(gameboard.board);  
   }
   else{
