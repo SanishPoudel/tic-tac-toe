@@ -52,21 +52,33 @@ function isDraw(gameboard) {
 function game(){
   // this will be the main function that will execute the game
   // the game will continue in a loop unless there is a win or a draw.
-  console.log(gameboard.board);
-  let player1 = Number(prompt("Choose a location for X. [1-9]"));
-  let player2 = Number(prompt("Choose a location for O. [1-9]"));
-  
-  if (player1 === player2) {
-    console.error("Please choose different numbers.");
-  }
+  console.table(gameboard.board);
+  for (let i = 0; i < 4; i++) {
+    while (1) {
+      let player1 = Number(prompt("Choose a location for X. [1-9]"));
 
-  if (gameboard.hasItem(player1) && gameboard.hasItem(player2)) {
-    gameboard.updateValue(player1, "X");
-    gameboard.updateValue(player2,"O");
-    console.log(gameboard.board);  
-  }
-  else{
-    console.error("Please choose from the given numbers.");
+      if (gameboard.hasItem(player1)) {
+        gameboard.updateValue(player1, "X");
+        console.table(gameboard.board);
+        break;
+      }
+      else {
+        console.error("Please choose from the empty spots only.");
+      }
+    }
+
+    while (1) {
+      let player2 = Number(prompt("Choose a location for O. [1-9]"));
+      
+      if (gameboard.hasItem(player2)) { 
+        gameboard.updateValue(player2,"O");
+        console.table(gameboard.board);  
+        break;
+      }
+      else{
+        console.error("Please choose from the given numbers.");
+      }
+    }
   }
 }
 
