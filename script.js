@@ -1,5 +1,5 @@
 // factory function to display gameboard
-function GameBoard() {
+const gameboard = (function GameBoard() {
   const board = [
     [
       1, 2, 3
@@ -37,9 +37,8 @@ function GameBoard() {
     hasItem,
     updateValue
   };
-}
+}) ();
 
-const gameboard = displayBoard();
 
 function checkWinner(gameboard) {
   // check gameboard for a win condition
