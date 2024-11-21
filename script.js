@@ -32,6 +32,18 @@ const gameboard = (function GameBoard() {
     return false;
   }
 
+  function isFull() {
+    for (row of board) {
+      for (item of row) {
+        if (Number.isInteger(item) == true) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+
   return {
     board,
     hasItem,
