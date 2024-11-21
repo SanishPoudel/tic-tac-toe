@@ -47,7 +47,8 @@ const gameboard = (function GameBoard() {
   return {
     board,
     hasItem,
-    updateValue
+    updateValue,
+    isFull
   };
 }) ();
 
@@ -66,7 +67,7 @@ function game(){
   // the game will continue in a loop unless there is a win or a draw.
   console.table(gameboard.board);
   while (gameboard.isFull !== true) {
-    while (1) {
+    while (gameboard.isFull !== true) {
       let player1 = Number(prompt("Choose a location for X. [1-9]"));
 
       if (gameboard.hasItem(player1)) {
@@ -79,7 +80,7 @@ function game(){
       }
     }
 
-    while (1) {
+    while (gameboard.isFull !== true) {
       let player2 = Number(prompt("Choose a location for O. [1-9]"));
       
       if (gameboard.hasItem(player2)) { 
