@@ -43,24 +43,40 @@ const gameboard = (function GameBoard() {
     return true;
   }
 
+  function checkWinner() {
+    //loop through to check for x and then o, return false if there isn't one yet.
+
+    // checking rows
+    for (let row = 0; row < 3; row ++) {
+      if (board[row][0] === board[row][1] && board[row][1] === board[row][2]) {
+        return board[row][0];
+      }
+    }
+
+    // checking columns
+    for (let col = 0; col < 3; col ++) {
+      if (board[0][col] === board[1][col] && board[1][col] === board[2][col]) {
+        return board[0][col];
+      }
+    }
+
+    // checking diagonal
+    if ((board[0][0] === board[1][1] && board[1][1] == board[2][2]) || 
+        (board[0][2] === board[1][1] && board[1][1] == board[2][0])) {
+          return board[1][1];
+        }
+
+    return false;
+  }
 
   return {
     board,
     hasItem,
     updateValue,
-    isFull
+    isFull,
+    checkWinner
   };
 }) ();
-
-
-function checkWinner(gameboard) {
-  // check gameboard for a win condition
-}
-
-function isDraw(gameboard) {
-  // check gameboard for a draw condition
-  // if board is full but win condition is false then it's a draw
-}
 
 function game(){
   // this will be the main function that will execute the game
@@ -75,6 +91,11 @@ function game(){
       if (gameboard.hasItem(player1)) {
         gameboard.updateValue(player1, "X");
         console.table(gameboard.board);
+        result = gameboard.checkWinner
+        if (gameboard.checkWinner() != false) {
+          console.log(gameboard.checkWinner(), "wins");
+          return;
+        }
         break;
       }
       else {
@@ -88,7 +109,11 @@ function game(){
       
       if (gameboard.hasItem(player2)) { 
         gameboard.updateValue(player2,"O");
-        console.table(gameboard.board);  
+        console.table(gameboard.board);
+        if (gameboard.checkWinner() != false) {
+          console.log(gameboard.checkWinner(), "wins");
+          return;
+        }  
         break;
       }
       else{
@@ -96,6 +121,7 @@ function game(){
       }
     }
   }
+  console.log("It's a draw");
 }
 
 game();
