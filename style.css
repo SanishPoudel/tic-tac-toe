@@ -1,0 +1,18 @@
+body {
+  display: grid;
+  grid-template-columns: 80vh 20vh 20vh 20vh 20vh;
+  grid-template-rows: 10vh 20vh 20vh 20vh 20vh;
+}
+
+.container {
+  grid-column: 2/5;
+  grid-row: 2/5;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 20vh 20vh 20vh;
+}
+
+.items {
+  border: solid black 1px;
+}
+
