@@ -3,7 +3,6 @@ const gameboard = (function GameBoard() {
 
   const items = document.querySelectorAll(".items");
   let choice = "X";
-
   const board = [
     [
       1, 2, 3
@@ -17,7 +16,7 @@ const gameboard = (function GameBoard() {
   ];
 
   function hasItem(item) {
-    for (row of board) {
+    for (let row of board) {
       if (row.includes(item)) {
         return true;
       }
@@ -26,7 +25,7 @@ const gameboard = (function GameBoard() {
   }
 
   function updateValue(oldValue, newValue) {
-    for (row of board) {
+    for (let row of board) {
       if (row.includes(oldValue)) {
         const index = row.indexOf(oldValue);
         row[index] = newValue;
@@ -37,8 +36,8 @@ const gameboard = (function GameBoard() {
   }
 
   function isFull() {
-    for (row of board) {
-      for (item of row) {
+    for (let row of board) {
+      for (let item of row) {
         if (Number.isInteger(item) == true) {
           return false;
         }
@@ -86,28 +85,26 @@ const gameboard = (function GameBoard() {
 
 gameboard.items.forEach((item)=> {
   item.addEventListener("click", ()=> {
-    // if (gameboard.isFull === true) {
-    //   alert("Please reset the page.")
-    //   return;
-    // }
+
     if (gameboard.checkWinner() !== false) {
       alert("Please reset the page to play again.")
       return;
     }
 
-    // gets here if the gameboard isn't full and there isn't a winner yet.
+    // gets here if there isn't a winner yet.
     let player = Number(item.id);
     if (gameboard.hasItem(player)) {
+
       // if the input is valid
       gameboard.updateValue(player, gameboard.choice);
       item.textContent = gameboard.choice;
-      if (gameboard.isFull() !== true) {
-        if (gameboard.checkWinner() !== false) {
-          alert(gameboard.checkWinner() + " wins");
+
+      // gamecheck logic
+      if (gameboard.checkWinner() !== false) {
+          alert(gameboard.checkWinner() + " wins.\nPlease reset the page to play again.");
           return;
-        }
-      } else if (gameboard.isFull() === true) {
-        alert("It's a draw");
+      } else if ((gameboard.isFull() === true) && (gameboard.checkWinner() === false)) {
+        alert("It's a draw. \nPlease reset the page to play again.");
         return;
       }
 
@@ -117,7 +114,9 @@ gameboard.items.forEach((item)=> {
       } else {
         gameboard.choice = "X";
       }
+
     } else {
+      // if the user selects an occupied box.
       alert("Please select a valid spot.")
     }
   });
