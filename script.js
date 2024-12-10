@@ -86,15 +86,16 @@ const gameboard = (function GameBoard() {
 
 gameboard.items.forEach((item)=> {
   item.addEventListener("click", ()=> {
-    if (gameboard.isFull === true) {
-      alert("Please reset the page.")
-      return;
-    }
+    // if (gameboard.isFull === true) {
+    //   alert("Please reset the page.")
+    //   return;
+    // }
     if (gameboard.checkWinner() !== false) {
       alert("Please reset the page to play again.")
       return;
     }
-    // gets here if the gameboard isn't full
+
+    // gets here if the gameboard isn't full and there isn't a winner yet.
     let player = Number(item.id);
     if (gameboard.hasItem(player)) {
       // if the input is valid
@@ -107,8 +108,10 @@ gameboard.items.forEach((item)=> {
         }
       } else if (gameboard.isFull() === true) {
         alert("It's a draw");
+        return;
       }
 
+      // changing the players so they can take turns
       if (gameboard.choice == "X") {
         gameboard.choice = "O";
       } else {
