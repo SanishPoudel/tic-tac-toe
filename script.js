@@ -1,3 +1,6 @@
+const items = document.querySelectorAll(".items");
+let choice = "X";
+
 // factory function to display gameboard
 const gameboard = (function GameBoard() {
   const board = [
@@ -78,50 +81,38 @@ const gameboard = (function GameBoard() {
   };
 }) ();
 
-function game(){
-  // this will be the main function that will execute the game
-  // the game will continue in a loop unless there is a win or a draw.
-  console.table(gameboard.board);
-  while (gameboard.isFull() !== true) {
-
-    while (gameboard.isFull() !== true) {
-
-      let player1 = Number(prompt("Choose a location for X. [1-9]"));
-
-      if (gameboard.hasItem(player1)) {
-        gameboard.updateValue(player1, "X");
-        console.table(gameboard.board);
-        result = gameboard.checkWinner
-        if (gameboard.checkWinner() != false) {
-          console.log(gameboard.checkWinner(), "wins");
+items.forEach((item)=> {
+  item.addEventListener("click", ()=> {
+    if (gameboard.isFull === true) {
+      alert("Please reset the page.")
+      return;
+    }
+    if (gameboard.checkWinner() !== false) {
+      alert("Please reset the page to play again.")
+      return;
+    }
+    // gets here if the gameboard isn't full
+    let player = Number(item.id);
+    if (gameboard.hasItem(player)) {
+      // if the input is valid
+      gameboard.updateValue(player, choice);
+      item.textContent = choice;
+      if (gameboard.isFull() !== true) {
+        if (gameboard.checkWinner() !== false) {
+          alert(gameboard.checkWinner() + " wins");
           return;
         }
-        break;
+      } else if (gameboard.isFull() === true) {
+        alert("It's a draw");
       }
-      else {
-        console.error("Please choose from the empty spots only.");
+
+      if (choice == "X") {
+        choice = "O";
+      } else {
+        choice = "X";
       }
+    } else {
+      alert("Please select a valid spot.")
     }
-
-    while (gameboard.isFull() !== true) {
-
-      let player2 = Number(prompt("Choose a location for O. [1-9]"));
-      
-      if (gameboard.hasItem(player2)) { 
-        gameboard.updateValue(player2,"O");
-        console.table(gameboard.board);
-        if (gameboard.checkWinner() != false) {
-          console.log(gameboard.checkWinner(), "wins");
-          return;
-        }  
-        break;
-      }
-      else{
-        console.error("Please choose from the given numbers.");
-      }
-    }
-  }
-  console.log("It's a draw");
-}
-
-game();
+  });
+});
