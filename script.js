@@ -1,8 +1,9 @@
-const items = document.querySelectorAll(".items");
-let choice = "X";
-
 // factory function to display gameboard
 const gameboard = (function GameBoard() {
+
+  const items = document.querySelectorAll(".items");
+  let choice = "X";
+
   const board = [
     [
       1, 2, 3
@@ -73,6 +74,8 @@ const gameboard = (function GameBoard() {
   }
 
   return {
+    items,
+    choice,
     board,
     hasItem,
     updateValue,
@@ -81,7 +84,7 @@ const gameboard = (function GameBoard() {
   };
 }) ();
 
-items.forEach((item)=> {
+gameboard.items.forEach((item)=> {
   item.addEventListener("click", ()=> {
     if (gameboard.isFull === true) {
       alert("Please reset the page.")
@@ -95,8 +98,8 @@ items.forEach((item)=> {
     let player = Number(item.id);
     if (gameboard.hasItem(player)) {
       // if the input is valid
-      gameboard.updateValue(player, choice);
-      item.textContent = choice;
+      gameboard.updateValue(player, gameboard.choice);
+      item.textContent = gameboard.choice;
       if (gameboard.isFull() !== true) {
         if (gameboard.checkWinner() !== false) {
           alert(gameboard.checkWinner() + " wins");
@@ -106,10 +109,10 @@ items.forEach((item)=> {
         alert("It's a draw");
       }
 
-      if (choice == "X") {
-        choice = "O";
+      if (gameboard.choice == "X") {
+        gameboard.choice = "O";
       } else {
-        choice = "X";
+        gameboard.choice = "X";
       }
     } else {
       alert("Please select a valid spot.")
